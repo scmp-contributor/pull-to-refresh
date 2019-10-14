@@ -1,4 +1,3 @@
-
 ![logo](logo.png)
 
 [![Travis](https://travis-ci.org/eggswift/pull-to-refresh.svg?branch=master)](https://travis-ci.org/eggswift/pull-to-refresh)
