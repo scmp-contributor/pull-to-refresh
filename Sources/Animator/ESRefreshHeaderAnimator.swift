@@ -44,8 +44,9 @@ open class ESRefreshHeaderAnimator: UIView, ESRefreshProtocol, ESRefreshAnimator
     open var trigger: CGFloat = 60.0
     open var executeIncremental: CGFloat = 60.0
     open var state: ESRefreshViewState = .pullToRefresh
+    open var isRefreshingAnimationEnded: Bool = false
 
-    fileprivate let imageView: UIImageView = {
+    public let imageView: UIImageView = {
         let imageView = UIImageView.init()
         if /* Carthage */ let bundle = Bundle.init(identifier: "com.eggswift.ESPullToRefresh") {
             imageView.image = UIImage(named: "icon_pull_to_refresh_arrow", in: bundle, compatibleWith: nil)
@@ -57,7 +58,7 @@ open class ESRefreshHeaderAnimator: UIView, ESRefreshProtocol, ESRefreshAnimator
         return imageView
     }()
     
-    fileprivate let titleLabel: UILabel = {
+    public let titleLabel: UILabel = {
         let label = UILabel.init(frame: CGRect.zero)
         label.font = UIFont.systemFont(ofSize: 14.0)
         label.textColor = UIColor.init(white: 0.625, alpha: 1.0)
@@ -65,7 +66,7 @@ open class ESRefreshHeaderAnimator: UIView, ESRefreshProtocol, ESRefreshAnimator
         return label
     }()
     
-    fileprivate let indicatorView: UIActivityIndicatorView = {
+    public let indicatorView: UIActivityIndicatorView = {
         let indicatorView = UIActivityIndicatorView.init(style: .gray)
         indicatorView.isHidden = true
         return indicatorView
@@ -92,6 +93,7 @@ open class ESRefreshHeaderAnimator: UIView, ESRefreshProtocol, ESRefreshAnimator
     }
   
     open func refreshAnimationEnd(view: ESRefreshComponent) {
+        isRefreshingAnimationEnded = true
         indicatorView.stopAnimating()
         indicatorView.isHidden = true
         imageView.isHidden = false
